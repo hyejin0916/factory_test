@@ -110,6 +110,7 @@ class FactorySelectAPIView(APIView):
             
             # 수정하는 데이터에 이미지 파일이 존재할 경우 기존 파일을 삭제
             if request.FILES.get("business_registration_file"):
+                print('switch test')
                 os.remove(os.path.join(settings.MEDIA_ROOT, factory_info.business_registration_file.path))
                 
             factory_serializer = serializers.FactorySerializer(instance=factory_info, data=request.data)
