@@ -1,0 +1,4 @@
+media/
+*/migrations/*
+../myenv/*
+*/__pycache__/*

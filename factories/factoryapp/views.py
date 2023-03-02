@@ -92,6 +92,7 @@ class FactorySelectAPIView(APIView):
         try:
             factory_info = self.get_factory_object(pk=pk)
             factory_serializer = serializers.FactorySerializer(factory_info)
+            print(factory_serializer.data)
             return Response(factory_serializer.data, status=status.HTTP_200_OK)
         
         except Exception as e:
@@ -108,10 +109,10 @@ class FactorySelectAPIView(APIView):
         try:
             factory_info = self.get_factory_object(pk=pk)
             
-            # 수정하는 데이터에 이미지 파일이 존재할 경우 기존 파일을 삭제
-            if request.FILES.get("business_registration_file"):
+            # 수정할 데이터에 이미지 파일이 존재하는 경우 + 기존 데이터에 이미지 파일이 존재하는 경우 = 기존 파일을 삭제
+            if request.FILES.get("business_registration_file") and factory_info.business_registration_file:
                 os.remove(os.path.join(settings.MEDIA_ROOT, factory_info.business_registration_file.path))
-                
+            
             factory_serializer = serializers.FactorySerializer(instance=factory_info, data=request.data)
             
             if factory_serializer.is_valid():
