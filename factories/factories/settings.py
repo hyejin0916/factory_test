@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'factoryapp',
     'drf_yasg',
+    'factoryapp_2',
 ]
 
 MIDDLEWARE = [
